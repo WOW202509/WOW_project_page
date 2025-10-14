@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="By grounding assessment in embodied task success instead of video metrics, World-In-World provides a principled yardstick for future research on generative world models in the context of embodiment.">
   <meta name="robots" content="index,follow">
-  <title>World-In-World</title>
+  <title>World-in-World: World Models in a Closed-Loop World</title>
   <meta property="og:title" content="World-in-World: World Models in a Closed-Loop World">
   <meta property="og:description" content="By grounding assessment in embodied task success instead of video metrics, World-In-World provides a principled yardstick for future research on generative world models in the context of embodiment.">
   <meta property="og:type" content="website">
@@ -13,6 +13,8 @@
   <meta property="og:image" content="assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://example.com">
+  <link rel="icon" type="image/jpeg" href="media/genex_logo.png">
+  <link rel="shortcut icon" type="image/jpeg" href="media/genex_logo.png">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -32,10 +34,9 @@
       <nav id="site-nav" class="site-nav" aria-label="Primary">
         <a href="#abstract">Abstract</a>
         <a href="#overview">Overview</a>
-        <a href="#pipeline">Pipeline</a>
-        <a href="#data">Data</a>
-        <a href="#results">Results</a>
-        <a href="#references">References</a>
+        <a href="#pipeline">Evaluation Pipeline</a>
+        <a href="#examples">Task Examples</a>
+        <a href="#results">Results and Analysis</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -50,9 +51,10 @@
           <p class="authors">Author One<sup>1</sup>, Author Two<sup>1</sup>, Author Three<sup>2</sup></p>
           <p class="affiliations"><sup>1</sup> University A, <sup>2</sup> Institute B</p>
           <div class="cta">
-            <a class="button primary" href="#" target="_blank" rel="noopener">Paper</a>
-            <a class="button ghost" aria-disabled="true" tabindex="-1">Code (Coming Soon)</a>
-            <a class="button ghost" aria-disabled="true" tabindex="-1">Data (Coming Soon)</a>
+            <a class="button primary" href="#" target="_blank" rel="noopener"><span class="emoji">📄</span>Paper</a>
+            <a class="button ghost" aria-disabled="true" tabindex="-1"><span class="emoji">💻</span>Code (Coming Soon)</a>
+            <a class="button primary" aria-disabled="true" tabindex="-1"><span class="emoji">🕹️</span>Interactive Demo</a>
+            <a class="button primary" aria-disabled="true" tabindex="-1"><span class="emoji">🏆</span>Leaderboard</a>
           </div>
         </div>
       </div>
@@ -104,12 +106,11 @@
               <img src="media/overview.png" alt="Overview" class="responsive-image">
             <!-- </div> -->
             <p class="caption caption-pipeline">
-              <p>
               In this work, we propose <img src="media/logo.svg" alt="World-In-World" class="inline-logo">, which wraps generative <u>World</u> models <u>In</u> a closed-loop <u>World</u> interface to measure their practical utility for embodied agents.
               <em>We test whether generated worlds actually enhance embodied reasoning and task performance</em>—for example, helping an agent perceive the environment, plan and execute actions, and replan based on new observations <em>within such a closed loop</em>. Establishing this evaluation framework is essential for tracking genuine progress across the rapidly expanding landscape of visual world models and embodied AI.
             </p>
               <!-- Specifically, we present a unified strategy for closed-loop online planning and a standardized action API to seamlessly integrate diverse world models into closed-loop tasks.
-              The online planning strategy allows the agent to look ahead by anticipating environmental changes and task rewards before committing to an action. The standardized action API harmonizes input modalities expected by different world models, so that each model can be controlled consistently within the same evaluation protocol. In addition, we introduce a post-training protocol that fine-tunes pretrained video generators using a modest amount of action–observation data drawn from the same action space as the downstream tasks, which allows us to examine their adaptation potential and to characterize a data scaling law. -->
+              The online planning strategy allows the agent to look ahead by anticipating environmental changes and task rewards before committing to an action. The standardized action API harmonizes input modalities expected by different world models, so that each model can be controlled consistently within the same evaluation protocol. In addition, we introduce a post-training protocol that fine-tunes pretrained video generators using a modest amount of action-observation data drawn from the same action space as the downstream tasks, which allows us to examine their adaptation potential and to characterize a data scaling law. -->
               <!-- We introduce the first open benchmark to evaluate world models by closed-loop task success, analyze the link between task success and visual quality. -->
             </p>
           </div>
@@ -118,7 +119,7 @@
     </section>
     <section id="pipeline" class="section alt">
       <div class="container">
-        <h2>Pipeline</h2>
+        <h2>Evaluation Pipeline</h2>
         <div class="media-single">
           <div class="media-frame">
             <!-- <div class="framed-media"> -->
@@ -146,31 +147,44 @@
         <!-- <p>Describe the end-to-end pipeline and data flow.</p> -->
       </div>
     </section>
-    <section id="data" class="section">
+    <section id="examples" class="section">
       <div class="container">
-        <h2>Training Data</h2>
-        <p>Summarize datasets and provide sample visualizations.</p>
-        <div class="">
-          <div class="media-card">
-            <div class="media-placeholder" role="img" aria-label="Dataset example placeholder"></div>
-            <p class="caption">Dataset sample 1</p>
-          </div>
-          <div class="media-card">
-            <div class="media-placeholder" role="img" aria-label="Dataset example placeholder"></div>
-            <p class="caption">Dataset sample 2</p>
-          </div>
-          <div class="media-card">
-            <div class="media-placeholder" role="img" aria-label="Dataset example placeholder"></div>
-            <p class="caption">Dataset sample 3</p>
+        <h2>Task Examples</h2>
+        <p>We provide four benchmark tasks that are carefully designed to evaluate the utility of visual world models in a closed-loop setting.</p>
+        <div class="media-single">
+          <div class="media-frame">
+            <!-- <div class="framed-media"> -->
+            <img src="media/task_overview.png" alt="Task Overview" class="responsive-image">
+            </img>
+            <!-- </div> -->
           </div>
         </div>
+
+        <!-- Embedded HTML block (placeholder) -->
+        <div class="media-single">
+          <div class="media-frame">
+              <iframe class="embedded-iframe" src="media/embed_placeholder.html" title="Embedded HTML placeholder"></iframe>
+            <p class="caption caption-pipeline"> (task examples demo)</p>
+          </div>
+        </div>
+
       </div>
     </section>
+    
     <section id="results" class="section alt">
       <div class="container">
-        <h2>Results</h2>
-        <p>Showcase qualitative and quantitative results.</p>
-        <div class="media-grid">
+        <h2>Results and Analysis</h2>
+        <p>Showcase qualitative and quantitative results and analysis.</p>
+
+        <!-- Embedded HTML block (placeholder) -->
+        <div class="media-single">
+          <div class="media-frame">
+              <iframe class="embedded-iframe" src="media/embed_placeholder.html" title="Embedded HTML placeholder"></iframe>
+            <p class="caption caption-pipeline"> (leaderboard)</p>
+          </div>
+        </div>
+
+        <!-- <div class="media-grid">
           <div class="media-card">
             <div class="media-placeholder" role="img" aria-label="Result image placeholder"></div>
             <p class="caption">Result example 1</p>
@@ -184,27 +198,62 @@
             <p class="caption">Result example 3</p>
           </div>
         </div>
+      </div> -->
+
+      <div class="media-single">
+        <div class="media-frame">
+          <div class="framed-media" style="width:85%;height:auto;display:block;margin:0 auto;box-shadow:none;border-width:3px;">
+          <img src="media/result_aes_sr.png" 
+          alt="Result AES-SR"
+          class="responsive-image"
+          >
+          </div>
+          </img>
+          <p class="caption caption-pipeline"> 
+            <strong>Controllability matters more than visuals for task success.</strong>
+            Recent video generators (e.g., Wan2.1) produce appealing clips but offer limited low-level control from text prompts, so they help embodied tasks only modestly without adaptation.
+            After action-conditioned post-training, action-motion alignment improves and success rates rise.
+            <br>
+            <em>Left:</em> embodied task success rate vs. visual quality. † = post-trained with extra data.
+            <br>
+            <em>Right:</em> higher controllability correlates with higher SR. Precise control, not just visual quality, enables effective decision-making.
+          </p>
+        </div>
       </div>
-    </section>
-    <section id="references" class="section">
-      <div class="container">
-        <h2>References</h2>
-        <ol class="references-list">
-          <li>Placeholder reference 1.</li>
-          <li>Placeholder reference 2.</li>
-          <li>Placeholder reference 3.</li>
-        </ol>
+
+      <div class="media-single">
+        <div class="media-frame">
+          <div class="framed-media" style="width:85%;height:auto;display:block;margin:0 auto;box-shadow:none;border-width:3px;">
+          <img src="media/train_test_scaling.png" 
+            alt="Train-Test Scaling"
+            class="responsive-image"
+          >
+          </div>
+          </img>
+          <p class="caption caption-pipeline"> 
+            <strong>Scaling improves performance: data and inference time.</strong>
+            Post-training data scaling: training Wan2.2†, Wan2.1† and SVD† for one epoch on 400 → 80K instances consistently boosts AR performance (e.g., Wan2.1† 60.25% → 63.34%, SVD† 56.80% → 60.98%). Wan2.2† (A14B) reaches nearly Wan2.1† after ~40K, suggesting action-conditioned post-training is more impactful than upgrading the pretrained generator. Larger models benefit more and saturate less than smaller ones.
+            Inference-time scaling: increasing world-model inferences per episode improves AR success (e.g., SVD† 53.36% → 60.98% when raising average rollouts from 3 to 11). More simulated futures let the planner choose better actions.
+            † denotes action-conditioned post-training.
+          </p>
+        </div>
       </div>
+
     </section>
+
     <section id="contact" class="section alt">
       <div class="container">
         <h2>Contact</h2>
-        <p>For questions, reach out at <a href="mailto:you@example.com">you@example.com</a>.</p>
-        <ul class="links">
-          <li><a href="#" target="_blank" rel="noopener">Paper</a></li>
-          <li><a href="#" target="_blank" rel="noopener">Code</a></li>
-          <li><a href="#" target="_blank" rel="noopener">Dataset</a></li>
-        </ul>
+        <p>For questions or submit your own results, reach out at <a href="mailto:you@example.com">you@example.com</a>.</p>
+        <h3 class="bibtex-title">BibTeX</h3>
+        <pre class="bibtex">
+@inproceedings{2025world-in-world,
+    title={World-in-World: World Models in a Closed-Loop World},
+    author={},
+    booktitle={},
+    year={2025}
+}
+        </pre>
       </div>
     </section>
   </main>
