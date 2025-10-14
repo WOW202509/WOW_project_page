@@ -22,7 +22,7 @@
       <a class="brand" href="#hero">
         <img src="media/logo.svg" 
         alt="World-In-World"
-        class="inline-logo">
+        class="inline-logo-larger">
       </a>
       <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="nav-toggle-bar"></span>
@@ -46,7 +46,7 @@
         <div class="hero-content">
           <img src="media/logo.svg" alt="Project logo" class="logo-title"> 
           <h1>World Models in a Closed-Loop World</h1>
-          <p class="subtitle">Brief one-line summary of your research contribution.</p>
+          <p class="subtitle">The first comprehensive <em>closed-loop</em> benchmark for visual world models.</p>
           <p class="authors">Author One<sup>1</sup>, Author Two<sup>1</sup>, Author Three<sup>2</sup></p>
           <p class="affiliations"><sup>1</sup> University A, <sup>2</sup> Institute B</p>
           <div class="cta">
@@ -94,22 +94,22 @@
         <p>Our study uncovers three surprises: (1) visual quality alone does not guarantee task success—controllability matters more; (2) scaling post-training with action-observation data is more effective than upgrading the pretrained video generators; and (3) allocating more inference-time compute allows WMs to substantially improve closed-loop performance. By centering evaluation on closed-loop outcomes, <img src="media/logo.svg" alt="World-In-World" class="inline-logo"> establishes a new benchmark for the systematic assessment of WMs.</p>
       </div>
     </section>
-    <section id="method" class="section">
+    <section id="overview" class="section">
       <div class="container">
         <h2>Overview</h2>
         <!-- <p>We introduce the first open benchmark to evaluate world models by closed-loop task success, analyze the link between task success and visual quality, and investigate scaling laws.</p> -->
         <div class="media-single">
           <div class="media-frame">
-            <div class="framed-media">
+            <!-- <div class="framed-media"> -->
               <img src="media/overview.png" alt="Overview" class="responsive-image">
-            </div>
+            <!-- </div> -->
             <p class="caption caption-pipeline">
               <p>
-              In this work, we proposing \method, which wraps generative \underline{World} models \underline{In} a closed-loop \underline{World} interface to measure their practical utility for embodied agents.
-              \emph{We tests whether generated worlds actually enhance embodied reasoning and task performance}—for example, helping an agent perceive the environment, plan and execute actions, and replan based on new observations \emph{within such a closed loop}. Establishing this evaluation framework is essential for tracking genuine progress across the rapidly expanding landscape of visual world models and embodied AI.
+              In this work, we propose <img src="media/logo.svg" alt="World-In-World" class="inline-logo">, which wraps generative <u>World</u> models <u>In</u> a closed-loop <u>World</u> interface to measure their practical utility for embodied agents.
+              <em>We test whether generated worlds actually enhance embodied reasoning and task performance</em>—for example, helping an agent perceive the environment, plan and execute actions, and replan based on new observations <em>within such a closed loop</em>. Establishing this evaluation framework is essential for tracking genuine progress across the rapidly expanding landscape of visual world models and embodied AI.
             </p>
               <!-- Specifically, we present a unified strategy for closed-loop online planning and a standardized action API to seamlessly integrate diverse world models into closed-loop tasks.
-              The online planning strategy allows the agent to look ahead by anticipating environmental changes and task rewards before committing to an action. The standardized action API harmonizes input modalities expected by different world models, so that each model can be controlled consistently within the same evaluation protocol. In addition, we introduce a post-training protocol that fine-tunes pretrained video generators using a modest amount of action–observation data drawn from the same action space as the downstream tasks, which allows us to examine their adaptation potential and to characterize a data scaling law. -->`
+              The online planning strategy allows the agent to look ahead by anticipating environmental changes and task rewards before committing to an action. The standardized action API harmonizes input modalities expected by different world models, so that each model can be controlled consistently within the same evaluation protocol. In addition, we introduce a post-training protocol that fine-tunes pretrained video generators using a modest amount of action–observation data drawn from the same action space as the downstream tasks, which allows us to examine their adaptation potential and to characterize a data scaling law. -->
               <!-- We introduce the first open benchmark to evaluate world models by closed-loop task success, analyze the link between task success and visual quality. -->
             </p>
           </div>
@@ -121,8 +121,26 @@
         <h2>Pipeline</h2>
         <div class="media-single">
           <div class="media-frame">
-            <div class="pipeline-diagram media-placeholder" role="img" aria-label="Pipeline diagram placeholder"></div>
-            <p class="caption caption-pipeline">pipeline example 1</p>
+            <!-- <div class="framed-media"> -->
+            <video class="demo-video" controls preload="metadata">
+              <source src="media/WIW_framework.mp4" type="video/mp4">
+            </video>
+            <!-- </div> -->
+            <p class="caption caption-pipeline">
+              Closed-loop online planning in <img src="media/logo.svg" alt="World-In-World" class="inline-logo">:
+              <br>
+              &nbsp;&nbsp; 1) At time step <em>t</em>, the agent receives the world state, represented by observation <strong>o</strong><sub><em>t</em></sub>.
+              <br>
+              &nbsp;&nbsp; 2) Then it invokes a proposal policy π<sub>proposal</sub> (❶) to produce a total of <em>M</em> candidate action plans. 
+              <br>
+              &nbsp;&nbsp; 3) The unified action API (❷) transforms each plan into the control inputs required by the world model. 
+              <br>
+              &nbsp;&nbsp; 4) The world model (❸) then predicts the corresponding future states as observations <strong>Ô</strong><sub><em>t</em></sub>. 
+              <br>
+              &nbsp;&nbsp; 5) The revision policy π<sub>revision</sub> (❹) evaluates all rollouts and commits to the best, yielding decision <strong>D</strong>*<sub><em>t</em></sub>. 
+              <br>
+              &nbsp;&nbsp; 6) This decision is applied in the environment, closing the interaction loop.
+            </p>
           </div>
         </div>
         <!-- <p>Describe the end-to-end pipeline and data flow.</p> -->
