@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Model Closed Loop Framework</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/aeqa.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+</head>
+<body>
+  <div class="container">
+    <!-- ========= Selection area ========= -->
+    <div class="selector-shell" id="selectorShell">
+      <div class="selector-title">👁️ Select by First-Frame Observation</div>
+      <div class="thumb-grid" id="thumbGrid"></div>
+
+      <div class="desc-row">
+        <div id="scenarioInfo" class="scenario-info">
+          👉 Pick a scenario above to see its Target & Prompt here.
+        </div>
+        <div>
+          <button id="startBtn" class="start-btn" onclick="startDemo()" disabled>Begin Demo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========= Demo area ========= -->
+    <div class="demo-shell" id="demoShell">
+      <div class="overview-panel">
+        <div class="panel-card">
+          <div class="section-header">Current Scenario</div>
+          <div id="currentScenarioBox" style="padding:10px;background:#f6fff6;border:1px solid #cfe9cf;border-radius:8px"></div>
+          <div style="margin-top:12px;display:flex;align-items:center;gap:8px;">
+            <div class="final-result-title">Final Result:</div>
+            <div id="statusDisplay" class="final-status-display success">Mission Success!</div>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="section-header" id="bevHeaderTitle">Bird's Eye View</div>
+          <div class="results-content">
+            <video id="birdEyeVideo"
+                   src="https://huggingface.co/spaces/WiW-collab/wiw-prototype/resolve/main/src/display/bev_video_5ZKStnWn8Zo.mp4"
+                   autoplay loop muted controls></video>
+          </div>
+        </div>
+
+        <div class="panel-card results-section">
+          <div class="section-header">Final Video</div>
+          <div class="results-content">
+            <video id="finalVideo" controls style="display:none"></video>
+          </div>
+        </div>
+      </div>
+
+      <div class="iteration-display" id="iterationDisplay">
+        <div style="text-align:center;color:#666;padding:16px">Processing will begin shortly…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/utils.js"></script>
+  <script src="js/scenarios.js"></script>
+  <script src="js/actions.js"></script>
+  <script src="js/videos.js"></script>
+  <script src="js/rendering.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

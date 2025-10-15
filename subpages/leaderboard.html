@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Generation Model Leaderboard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        .chart-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0 0 30px 0;
+            color: #ffffff;
+        }
+
+        .rankings {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .model-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            border-left: 4px solid transparent;
+        }
+
+        .model-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(4px) translateY(0);
+        }
+
+        .model-item.commercial { border-left-color: #ec4899; }
+        .model-item.research { border-left-color: #06b6d4; }
+        .model-item.open-source { border-left-color: #10b981; }
+
+        .rank {
+            background: rgba(255, 255, 255, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 20px;
+            font-size: 16px;
+            min-width: 36px;
+        }
+
+        .model-info {
+            flex: 1;
+            margin-right: 20px;
+            min-width: 200px;
+        }
+
+        .model-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .model-category {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .metrics-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: auto;
+        }
+
+        .metric-group {
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .metric-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .task-success {
+            color: #f59e0b;
+        }
+
+        .gen-quality {
+            color: #6366f1;
+        }
+
+        .progress-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 200px;
+            margin: 0 20px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: all 1.2s ease-in-out;
+            width: 0%;
+        }
+
+        .success-bar { background: linear-gradient(90deg, #10b981, #f59e0b); }
+        .quality-bar { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+        }
+
+        .commercial-color { background: #ec4899; }
+        .research-color { background: #06b6d4; }
+        .open-source-color { background: #10b981; }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .model-item.animate {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .model-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .metrics-section {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .progress-bars {
+                width: 100%;
+                margin: 12px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Video World Models Leaderboard</h1>
+            <p class="subtitle">Measuring performance on task success and generation quality</p>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color commercial-color"></div>
+                <span>Zero-Shot Models</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color research-color"></div>
+                <span>Post-Trained Models</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color open-source-color"></div>
+                <span>Open Source Models</span>
+            </div>
+        </div>
+
+        <h2 class="chart-title">Performance Rankings</h2>
+        <div class="rankings" id="rankings-container"></div>
+
+        <div class="footer">
+            <p>Task Success Rate measures completion of video generation objectives • Generation Quality measures visual fidelity and coherence</p>
+        </div>
+    </div>
+
+    <script>
+        const models = [
+          {
+            name: "Wan2.1†",
+            category: "Alibaba • Video Generation • Panoroma",
+            type: "research",
+            success: 62.6,
+            quality: 0.380
+          },
+          {
+            name: "SVD†",
+            category: "Stability AI • Video Generation • Panoroma",
+            type: "research",
+            success: 61.0,
+            quality: 0.363
+          },
+          {
+            name: "Cosmos†",
+            category: "Nvidia • Video Generation • Panoroma",
+            type: "research",
+            success: 60.3,
+            quality: 0.360
+          },
+          {
+            name: "Runway",
+            category: "Runway • Video Generation", 
+            type: "commercial",
+            success: 64.8,
+            quality: 0.360 //placeholder
+          },
+          {
+            name: "Wan2.2 14B†",
+            category: "Alibaba • Video Generation • Front",
+            type: "research",
+            success: 62.4,
+            quality: 0.360 // placeholder
+          },
+          {
+            name: "Wan2.1†",
+            category: "Alibaba • Video Generation • Front",
+            type: "research",
+            success: 62.3,
+            quality: 0.380 //placeholder
+          },
+          {
+            name: "Wan2.2 A14B",
+            category: "Alibaba • Video Generation",
+            type: "commercial",
+            success: 59.5,
+            quality: 0.469
+          },
+          {
+            name: "Cosmos†",
+            category: "Nvidia • Video Generation • Front",
+            type: "research",
+            success: 59.0,
+            quality: 0.360 //placeholder
+          },
+          {
+            name: "Wan2.1",
+            category: "Alibaba • Video Generation",
+            type: "commercial",
+            success: 58.3,
+            quality: 0.478
+          },
+          {
+            name: "SVD†",
+            category: "Stability AI • Video Generation • Front",
+            type: "research",
+            success: 57.9,
+            quality: 0.363 //placeholder
+          },
+          {
+            name: "SVD",
+            category: "Stability AI • Video Generation",
+            type: "commercial",
+            success: 57.7,
+            quality: 0.371
+          },
+          {
+            name: "Hunyuan",
+            category: "Hunyuan • Video Generation",
+            type: "commercial",
+            success: 57.7,
+            quality: 0.396
+          },
+          {
+            name: "SE3DS",
+            category: "Open Source • Image Generation",
+            type: "open-source",
+            success: 57.5,
+            quality: 0.365
+          },
+          {
+            name: "LTX†",
+            category: "Lightricks • Image Generation • Panorama", //check
+            type: "research",
+            success: 57.5,
+            quality: 0.340
+          },
+          {
+            name: "NWM",
+            category: "Meta • Image Generation",
+            type: "open-source",
+            success: 57.4,
+            quality: 0.325
+          },
+          {
+            name: "Wan2.2 5B†",
+            category: "Alibaba • Video Generation • Front",
+            type: "research",
+            success: 57.2,
+            quality: 0.325 //placeholder
+          },
+          {
+            name: "PathDreamer",
+            category: "Open Source • Image Generation",
+            type: "open-source",
+            success: 57.0,
+            quality: 0.339
+          },
+          {
+            name: "LTX",
+            category: "Lightricks • Image Generation",
+            type: "commercial",
+            success: 56.1,
+            quality: 0.382
+          },
+          {
+            name: "Wan2.2 5B†",
+            category: "Alibaba • Video Generation • Panorama",
+            type: "research",
+            success: 56.3,
+            quality: 0.380
+          },
+          {
+            name: "Wan2.2 5B",
+            category: "Alibaba • Video Generation",
+            type: "commercial",
+            success: 55.4,
+            quality: 0.393
+          },
+          {
+            name: "Cosmos",
+            category: "Nvidia • Video Generation",
+            type: "commercial",
+            success: 55.4,
+            quality: 0.482
+          },
+        ];
+
+        function renderModels() {
+            const container = document.getElementById("rankings-container");
+            models.sort((a, b) => b.success - a.success);
+
+
+            models.forEach((model, index) => {
+                const rank = index + 1;
+                const delay = rank * 100;
+
+
+                let type;
+                if (model.name.includes("†")) {
+                    type = "research"; // 蓝色
+                } else if (model.category.includes("Open Source")) {
+                    type = "open-source"; // 绿色
+                } else {
+                    type = "commercial"; // 红色
+                }
+
+
+                const item = document.createElement("div");
+                item.className = `model-item ${type}`;
+                item.dataset.delay = delay;
+
+
+                item.innerHTML = `
+                    <div class="rank">${rank}</div>
+                    <div class="model-info">
+                    <div class="model-name">${model.name}</div>
+                    <div class="model-category">${model.category}</div>
+                    </div>
+                    <div class="progress-bars">
+                    <div class="progress-bar">
+                    <div class="progress-fill success-bar" data-width="${Math.round(model.success * 1.6)}"></div>
+                    </div>
+                    <div class="progress-bar">
+                    <div class="progress-fill quality-bar" data-width="${Math.round((model.quality || 0) * 200)}"></div>
+                    </div>
+                    </div>
+                    <div class="metrics-section">
+                    <div class="metric-group">
+                    <div class="metric-label">Task Success</div>
+                    <div class="metric-value task-success">${model.success.toFixed(1)}%</div>
+                    </div>
+                    <div class="metric-group">
+                    <div class="metric-label">Gen Quality</div>
+                    <div class="metric-value gen-quality">${model.quality ? model.quality.toFixed(3) : "–"}</div>
+                    </div>
+                    </div>
+                `;
+
+                container.appendChild(item);
+            });
+        }
+
+        function initializeAnimations() {
+          const items = document.querySelectorAll('.model-item');
+          items.forEach((item, index) => {
+              const delay = parseInt(item.dataset.delay) || index * 100;
+              setTimeout(() => {
+                  item.classList.add('animate');
+                  animateProgressBars(item);
+              }, delay);
+          });
+        }
+
+        function animateProgressBars(item) {
+          const progressFills = item.querySelectorAll('.progress-fill');
+          setTimeout(() => {
+              progressFills.forEach(fill => {
+                  const targetWidth = fill.dataset.width;
+                  fill.style.width = targetWidth + '%';
+              });
+          }, 300);
+        }
+
+        function addInteractivity() {
+          document.querySelectorAll('.model-item').forEach(item => {
+              item.addEventListener('mouseenter', function() {
+                  const progressBars = this.querySelectorAll('.progress-fill');
+                  progressBars.forEach(bar => {
+                      bar.style.transform = 'scaleY(1.3)';
+                      bar.style.boxShadow = '0 0 15px rgba(255, 255, 255, 0.2)';
+                  });
+              });
+
+              item.addEventListener('mouseleave', function() {
+                  const progressBars = this.querySelectorAll('.progress-fill');
+                  progressBars.forEach(bar => {
+                      bar.style.transform = 'scaleY(1)';
+                      bar.style.boxShadow = 'none';
+                  });
+              });
+          });
+        }
+
+        window.addEventListener('load', function() {
+            renderModels();
+            initializeAnimations();
+            addInteractivity();
+        });
+    </script>
+</body>
+</html>
