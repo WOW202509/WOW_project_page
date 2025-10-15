@@ -1,4 +1,4 @@
-/* ========= 全局重置 ========= */
+
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +12,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ========= 选择器外壳 ========= */
 .selector-shell {
   background: #fff;
   border-radius: 14px;
@@ -26,7 +25,6 @@ body {
   margin-bottom: 10px;
 }
 
-/* ========= 缩略图卡片 ========= */
 .thumb-card {
   position: relative;
   border: 2px solid #e6e9ef;
@@ -82,7 +80,6 @@ body {
   font-weight: 700;
 }
 
-/* ========= 场景信息 ========= */
 .scenario-info {
   flex: 1;
   min-width: 260px;
@@ -94,7 +91,6 @@ body {
   font-size: .95em;
 }
 
-/* ========= 按钮 ========= */
 .start-btn {
   background: linear-gradient(135deg, #4285f4, #34a853) !important;
   color: #fff !important;
@@ -123,7 +119,6 @@ body {
   cursor: pointer;
 }
 
-/* ========= Demo 外壳 ========= */
 .demo-shell {
   display: none;
   margin-top: 18px;
@@ -137,7 +132,6 @@ body {
   display: block;
 }
 
-/* ========= 面板卡片 ========= */
 .panel-card {
   background: #fff;
   border: 2px solid #e8eaed;
@@ -173,7 +167,6 @@ body {
   padding: 8px;
 }
 
-/* ========= 视频 ========= */
 #birdEyeVideo,
 #finalVideo {
   width: 100%;
@@ -182,7 +175,6 @@ body {
   border-radius: 6px;
 }
 
-/* ========= 状态显示 ========= */
 .final-status-display {
   padding: 6px 12px;
   border-radius: 14px;
@@ -195,7 +187,6 @@ body {
   color: #fff;
 }
 
-/* ========= 模型选择器 ========= */
 #modelSelector {
   padding: 6px 12px;
   border: 2px solid #e9ecef;
@@ -214,6 +205,7 @@ body {
   -moz-appearance: none;
   background-image: none;
   position: relative;
+  padding-right: 24px;
 }
 
 #modelSelector::after {
@@ -225,6 +217,7 @@ body {
   pointer-events: none;
   font-size: 12px;
   color: #666;
+  font-size: 12px;
 }
 
 #modelSelector:hover {
@@ -239,7 +232,6 @@ body {
   box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
 }
 
-/* ========= 迭代显示 ========= */
 .iteration-display {
   background: #fff;
   border: 2px solid #e8eaed;
@@ -258,7 +250,6 @@ body {
   margin-bottom: 12px;
 }
 
-/* ========= 序列指示器 ========= */
 .sequence-indicator {
   text-align: center;
   margin-bottom: 12px;
@@ -301,7 +292,6 @@ body {
   font-size: .8em;
 }
 
-/* ========= 步骤卡片 ========= */
 .step-card {
   border: 2px solid #e8eaed;
   border-radius: 10px;
@@ -338,7 +328,6 @@ body {
   font-size: .8em;
 }
 
-/* ========= 观察盒子 ========= */
 .obs-box {
   background: #f4f6f8;
   border-radius: 6px;
@@ -357,7 +346,6 @@ body {
   display: block;
 }
 
-/* ========= 计划盒子 ========= */
 .plan-box {
   border: 1px dashed #cfd8dc;
   border-radius: 6px;
@@ -368,7 +356,6 @@ body {
   font-size: .75em;
 }
 
-/* ========= 成功说明 ========= */
 .success-explain {
   display: inline-block;
   margin: 12px auto;
@@ -379,7 +366,6 @@ body {
   text-align: center;
 }
 
-/* ========= 其他小组件 ========= */
 .topline {
   color: #3b3f47;
   font-size: .9em;
@@ -397,4 +383,50 @@ body {
 .conf-fill {
   height: 100%;
   background: linear-gradient(90deg, #ea4335, #fbbc04, #34a853);
+}
+
+.select-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.select-wrap select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 28px;       
+  background: linear-gradient(135deg,#fff 0%,#f8f9fa 100%);
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #495057;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,.05);
+}
+
+.select-wrap::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #666;  
+  pointer-events: none;
+}
+
+.select-wrap select:hover {
+  border-color: #4285f4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(66,133,244,.15);
+}
+
+.select-wrap select:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 3px rgba(66,133,244,.2);
 }

@@ -4,14 +4,12 @@
     color: #eee;
   }
 
-  /* 卡片与容器 */
   .selector-shell, .demo-shell, .panel-card, .step-card, .plan-box, .iteration-display {
     background: #1f1f1f;
     color: #eee;
     border-color: #333;
   }
 
-  /* 缩略图 */
   .thumb-card {
     background:#2a2a2a;
     border-color:#444;
@@ -21,13 +19,11 @@
     border-color:#34a853;
   }
 
-  /* Scenario info */
   .scenario-info {
     background:linear-gradient(135deg,#3a2c00 0%,#5a4200 100%);
     color:#ffda6a;
   }
 
-  /* Header / section 栏依旧彩色 */
   .section-header {
     background:linear-gradient(135deg,#34a853,#4285f4);
     color:#fff;
@@ -43,7 +39,8 @@
     background:linear-gradient(135deg,#ff6b6b,#4ecdc4);
     color:#fff;
   }
-#modelSelector {
+
+  #modelSelector {
     background: linear-gradient(135deg, #333 0%, #2a2a2a 100%);
     border-color: #555;
     color: #eee;
@@ -61,7 +58,6 @@
     border-color: #4285f4;
   }
 
-  /* 提示框 */
   .success-explain {
     background:#1e4620;
     border-color:#2e7d32;
@@ -72,7 +68,6 @@
     color:#fff;
   }
 
-  /* 进度条 */
   .conf-bar {
     background:#333;
   }
@@ -80,44 +75,46 @@
     background:linear-gradient(90deg,#ea4335,#fbbc04,#34a853);
   }
 
-  /* 按钮 */
   .nav-btn, .start-btn {
     background:linear-gradient(135deg,#3399ff,#33cc66);
     color:#fff;
     border:none;
   }
-    /* Current Scenario 内容文字 */
+  
   #currentScenarioBox .scenario-text,
   #currentScenarioBox .scenario-text * {
     color: #111 !important;
   }
   
-  /* Final Result 标题在深色模式下变白 */
   .final-result-title {
     color: #eee !important;
   }
 
-  /* Step number 圆圈 */
   .step-num {
     background: #555 !important;
     color: #fff !important;
   }
 
-  /* 黄色提示框文字 */
   .step-card div[style*="background:#fff3cd"] {
     background: #5a4a00 !important;
     border-color: #d6b400 !important;
     color: #fff6d5 !important;
   }
-    /* Sequence indicator 小圆圈数字 */
+
   .flow-num {
-    background: #444 !important;   /* 深色背景 */
-    color: #fff !important;        /* 白色文字 */
+    background: #444 !important;  
+    color: #fff !important;
   }
   
-  /* Step 卡片左上角的数字圆圈 */
   .step-num {
     background: #444 !important;
     color: #fff !important;
   }
+
+  .select-wrap select {
+    background: linear-gradient(135deg,#333 0%,#2a2a2a 100%);
+    border-color: #555;
+    color: #eee;
+  }
+  .select-wrap::after { border-top-color: #ccc; }
 }

@@ -8,8 +8,17 @@ async function startDemo() {
   const resp = await fetch(manifestUrl);
   const manifest = await resp.json();
   const models = Object.keys(manifest.models);
+  const modelNameMap = {
+    "FTcosmos": "Cosmos-P2†",
+    "FTwan21": "Wan2.1†",
+    "FTwan22_A14B": "Wan2.2 A14B†",
+    "GTsim": "Ground Truth",
+    "igen": "SVD†",
+    "svd": "SVD",
+    "wan21": "Wan2.1"
+  };
   const modelOptions = models.map(m =>
-    `<option value="${m}" ${m === currentScenario.model ? 'selected' : ''}>${m}</option>`
+    `<option value="${m}" ${m === currentScenario.model ? 'selected' : ''}>${modelNameMap[m] || m}</option>`
   ).join('');
 
   document.getElementById('currentScenarioBox').innerHTML =
@@ -18,7 +27,11 @@ async function startDemo() {
       <div>🎯 <b>${currentScenario.target}</b></div>
       <div>📝 "${currentScenario.prompt}"</div>
       <div id="modelSelectorBox" style="margin-top:12px">
-        <label>🤖 Model: <select id="modelSelector">${modelOptions}</select></label>
+        <label>🤖 Model:
+          <div class="select-wrap">
+            <select id="modelSelector">${modelOptions}</select>
+          </div>
+        </label>
       </div>
     </div>`;
 
@@ -66,7 +79,7 @@ if (currentScenario.taskType === "AEQA" || currentScenario.taskType === "IGNav" 
   const overview = document.querySelector(".overview-panel");
 
   if (bevPanel && overview) {
-    if (currentScenario.taskType === "AEQA") {
+    if (currentScenario.taskType === "AEQA" || currentScenario.taskType === "Manip") {
       bevPanel.style.display = "none";
       overview.style.gridTemplateColumns = "1fr 1fr";
     } else {
