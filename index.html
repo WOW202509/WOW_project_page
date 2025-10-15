@@ -22,7 +22,7 @@
   <header class="site-header" role="banner">
     <div class="container">
       <a class="brand" href="#hero">
-        <img src="media/logo.svg" 
+        <img src="media/logo.svg"
         alt="World-In-World"
         class="inline-logo-larger">
       </a>
@@ -45,7 +45,7 @@
     <section id="hero" class="hero hero-centered">
       <div class="container">
         <div class="hero-content">
-          <img src="media/logo.svg" alt="Project logo" class="logo-title"> 
+          <img src="media/logo.svg" alt="Project logo" class="logo-title">
           <h1>World Models in a Closed-Loop World</h1>
           <p class="subtitle">The first comprehensive <em>closed-loop</em> benchmark for visual world models.</p>
           <p class="authors">Author One<sup>1</sup>, Author Two<sup>1</sup>, Author Three<sup>2</sup></p>
@@ -132,13 +132,13 @@
               <br>
               &nbsp;&nbsp; 1) At time step <em>t</em>, the agent receives the world state, represented by observation <strong>o</strong><sub><em>t</em></sub>.
               <br>
-              &nbsp;&nbsp; 2) Then it invokes a proposal policy π<sub>proposal</sub> (❶) to produce a total of <em>M</em> candidate action plans. 
+              &nbsp;&nbsp; 2) Then it invokes a proposal policy π<sub>proposal</sub> (❶) to produce a total of <em>M</em> candidate action plans.
               <br>
-              &nbsp;&nbsp; 3) The unified action API (❷) transforms each plan into the control inputs required by the world model. 
+              &nbsp;&nbsp; 3) The unified action API (❷) transforms each plan into the control inputs required by the world model.
               <br>
-              &nbsp;&nbsp; 4) The world model (❸) then predicts the corresponding future states as observations <strong>Ô</strong><sub><em>t</em></sub>. 
+              &nbsp;&nbsp; 4) The world model (❸) then predicts the corresponding future states as observations <strong>Ô</strong><sub><em>t</em></sub>.
               <br>
-              &nbsp;&nbsp; 5) The revision policy π<sub>revision</sub> (❹) evaluates all rollouts and commits to the best, yielding decision <strong>D</strong>*<sub><em>t</em></sub>. 
+              &nbsp;&nbsp; 5) The revision policy π<sub>revision</sub> (❹) evaluates all rollouts and commits to the best, yielding decision <strong>D</strong>*<sub><em>t</em></sub>.
               <br>
               &nbsp;&nbsp; 6) This decision is applied in the environment, closing the interaction loop.
             </p>
@@ -160,17 +160,17 @@
           </div>
         </div>
 
-        <!-- Embedded HTML block --> 
+        <!-- Embedded HTML block -->
         <div class="media-single">
           <div class="media-frame media-frame-wide media-frame-themed" style="width:160ch;">
             <div class="embedded-frame-header"><span class="emoji">🕹️</span>Interactive Task Examples</div>
-              <iframe class="embedded-iframe" src="subpages/index.html" title="Interactive Task Examples"></iframe>
+              <iframe class="embedded-iframe" data-auto-height="true" src="subpages/index.html" title="Interactive Task Examples"></iframe>
           </div>
         </div>
 
       </div>
     </section>
-    
+
     <section id="results" class="section alt">
       <div class="container">
         <h2>Results and Analysis</h2>
@@ -196,13 +196,13 @@
       <div class="media-single">
         <div class="media-frame">
           <div class="framed-media" style="width:85%;height:auto;display:block;margin:0 auto;box-shadow:none;border-width:3px;">
-          <img src="media/result_aes_sr.png" 
+          <img src="media/result_aes_sr.png"
           alt="Result AES-SR"
           class="responsive-image"
           >
           </div>
           </img>
-          <p class="caption caption-pipeline"> 
+          <p class="caption caption-pipeline">
             <strong>Controllability matters more than visuals for task success.</strong>
             Recent video generators (e.g., Wan2.1) produce appealing clips but offer limited low-level control from text prompts, so they help embodied tasks only modestly without adaptation.
             After action-conditioned post-training, action-motion alignment improves and success rates rise.
@@ -217,13 +217,13 @@
       <div class="media-single">
         <div class="media-frame">
           <div class="framed-media" style="width:85%;height:auto;display:block;margin:0 auto;box-shadow:none;border-width:3px;">
-          <img src="media/train_test_scaling.png" 
+          <img src="media/train_test_scaling.png"
             alt="Train-Test Scaling"
             class="responsive-image"
           >
           </div>
           </img>
-          <p class="caption caption-pipeline"> 
+          <p class="caption caption-pipeline">
             <strong>Scaling improves performance: data and inference time.</strong>
             Post-training data scaling: training Wan2.2†, Wan2.1† and SVD† for one epoch on 400 → 80K instances consistently boosts AR performance (e.g., Wan2.1† 60.25% → 63.34%, SVD† 56.80% → 60.98%). Wan2.2† (A14B) reaches nearly Wan2.1† after ~40K, suggesting action-conditioned post-training is more impactful than upgrading the pretrained generator. Larger models benefit more and saturate less than smaller ones.
             Inference-time scaling: increasing world-model inferences per episode improves AR success (e.g., SVD† 53.36% → 60.98% when raising average rollouts from 3 to 11). More simulated futures let the planner choose better actions.
@@ -231,7 +231,7 @@
           </p>
         </div>
 
-        <!-- Embedded HTML block --> 
+        <!-- Embedded HTML block -->
         <div class="media-single">
           <div class="media-frame media-frame-wide media-frame-themed" style="width:160ch;">
             <div class="embedded-frame-header"><span class="emoji">🏆</span> World-In-World Leaderboard</div>
@@ -245,7 +245,7 @@
     <section id="contact" class="section">
       <div class="container">
         <h2>Contact</h2>
-        <p>For questions or submit your own results, reach out at <a href="mailto:you@example.com">you@example.com</a>.</p>
+        <p>For questions or to submit your own results, reach out at <a href="mailto:you@example.com">you@example.com</a>.</p>
         <h3 class="bibtex-title">BibTeX</h3>
         <div class="bibtex-wrap">
           <button class="bibtex-copy-btn" type="button" aria-label="Copy BibTeX">Copy</button>

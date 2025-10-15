@@ -63,8 +63,8 @@
 
   // No slider needed now (single demo video placeholder)
   
-  // Auto-resize embedded iframes to fit their content
-  const embeddedIframes = Array.from(document.querySelectorAll('iframe.embedded-iframe'));
+  // Auto-resize embedded iframes to fit their content (opt-in via data-auto-height="true")
+  const embeddedIframes = Array.from(document.querySelectorAll('iframe.embedded-iframe[data-auto-height="true"]'));
   const computeDocHeight = (doc) => {
     try {
       if (!doc) return 0;
