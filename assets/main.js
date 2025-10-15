@@ -62,5 +62,101 @@
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
   // No slider needed now (single demo video placeholder)
+  
+  // Auto-resize embedded iframes to fit their content
+  const embeddedIframes = Array.from(document.querySelectorAll('iframe.embedded-iframe'));
+  const computeDocHeight = (doc) => {
+    try {
+      if (!doc) return 0;
+      const body = doc.body;
+      const html = doc.documentElement;
+      if (!body || !html) return 0;
+      // Use scrollHeight to allow shrink as content collapses
+      return Math.max(body.scrollHeight, html.scrollHeight);
+    } catch { return 0; }
+  };
+  const setIframeHeight = (iframe, height) => {
+    if (!iframe) return;
+    const target = Math.max(0, Math.floor(height || 0));
+    if (target > 0) iframe.style.height = `${target}px`;
+  };
+
+  // Strategy 1: Listen for postMessage from subpages (works with file:// as well)
+  window.addEventListener('message', (event) => {
+    // Do not rely on origin; instead, verify the source matches one of our iframes
+    const data = event.data;
+    if (!data || typeof data !== 'object' || data.type !== 'subpage:height') return;
+    const target = embeddedIframes.find((f) => {
+      try { return f.contentWindow === event.source; } catch { return false; }
+    });
+    if (!target) return;
+    const h = Number(data.height);
+    if (Number.isFinite(h) && h > 0) setIframeHeight(target, h);
+  });
+
+  // Strategy 2: Same-origin direct measurement with ResizeObserver
+  embeddedIframes.forEach((iframe) => {
+    const attachObservers = () => {
+      let ro = null; let mo = null;
+      try {
+        const doc = iframe.contentDocument;
+        const body = doc && doc.body;
+        if (!body) return;
+        // Initial set
+        setIframeHeight(iframe, computeDocHeight(doc));
+        // ResizeObserver for layout changes
+        ro = new ResizeObserver(() => setIframeHeight(iframe, computeDocHeight(doc)));
+        ro.observe(body);
+        // MutationObserver as a fallback for DOM changes
+        mo = new MutationObserver(() => setIframeHeight(iframe, computeDocHeight(doc)));
+        mo.observe(body, { attributes:true, childList:true, subtree:true, characterData:true });
+        // A couple of delayed reads to catch late layout
+        setTimeout(() => setIframeHeight(iframe, computeDocHeight(doc)), 50);
+        setTimeout(() => setIframeHeight(iframe, computeDocHeight(doc)), 250);
+      } catch (_) {
+        // Cross-origin: skip direct access
+      }
+
+      // Cleanup on reload of iframe
+      iframe.addEventListener('load', () => {
+        if (ro) try { ro.disconnect(); } catch {}
+        if (mo) try { mo.disconnect(); } catch {}
+        // Re-attach for new document
+        attachObservers();
+      }, { once: true });
+    };
+    const docReady = () => {
+      try {
+        const rs = iframe.contentDocument && iframe.contentDocument.readyState;
+        return rs === 'interactive' || rs === 'complete';
+      } catch { return false; }
+    };
+    if (docReady()) attachObservers();
+    else iframe.addEventListener('load', attachObservers, { once: true });
+  });
+
+  // Copy BibTeX button
+  const copyBtn = document.querySelector('.bibtex-copy-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const pre = document.querySelector('.bibtex-wrap pre.bibtex');
+      if (!pre) return;
+      const text = pre.textContent || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = 'Copied';
+        setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1500);
+      } catch (_) {
+        // Fallback: select and copy
+        const range = document.createRange();
+        range.selectNodeContents(pre);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        try { document.execCommand('copy'); copyBtn.textContent = 'Copied'; } catch {}
+        setTimeout(() => { copyBtn.textContent = 'Copy'; sel.removeAllRanges(); }, 1500);
+      }
+    });
+  }
 })();
 

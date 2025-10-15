@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>World Model Closed Loop Framework</title>
+  <!-- <meta name="color-scheme" content="light"> -->
+  <title>🕹️ World-In-World Interactive Demo</title>
+  <link rel="icon" type="image/svg+xml" href="../media/genex_logo.png">
+  <link rel="shortcut icon" type="image/svg+xml" href="../media/genex_logo.png">
   
   <!-- CSS -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/aeqa.css">
-  <link rel="stylesheet" href="css/darkmode.css">
+  <!-- <link rel="stylesheet" href="css/darkmode.css"> -->
 </head>
 <body>
   <div class="container">
@@ -71,5 +74,33 @@
   <script src="js/rendering.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    (function(){
+      const compute = () => {
+        try {
+          const body = document.body;
+          const html = document.documentElement;
+          return Math.max(body.scrollHeight, html.scrollHeight);
+        } catch { return 0; }
+      };
+      const post = () => {
+        const h = compute();
+        if (h > 0) parent.postMessage({ type: 'subpage:height', height: h }, '*');
+      };
+      // Initial + delayed posts to catch late layout
+      window.addEventListener('load', () => {
+        post();
+        setTimeout(post, 50);
+        setTimeout(post, 250);
+      });
+      // Observe changes
+      const ro = new ResizeObserver(post);
+      ro.observe(document.body);
+      const mo = new MutationObserver(post);
+      mo.observe(document.body, { attributes:true, childList:true, subtree:true, characterData:true });
+      // Also respond to viewport changes inside iframe
+      window.addEventListener('resize', post);
+    })();
+  </script>
 </body>
 </html>

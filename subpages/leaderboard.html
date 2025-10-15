@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Generation Model Leaderboard</title>
+    <title>🏆 World-In-World Leaderboard</title>
+    <link rel="icon" type="image/svg+xml" href="../media/genex_logo.png">
+    <link rel="shortcut icon" type="image/svg+xml" href="../media/genex_logo.png">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
@@ -252,7 +254,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="title">Video World Models Leaderboard</h1>
+            <h1 class="title">World-In-World Leaderboard</h1>
             <p class="subtitle">Measuring performance on task success and generation quality</p>
         </div>
 
@@ -267,7 +269,7 @@
             </div>
             <div class="legend-item">
                 <div class="legend-color open-source-color"></div>
-                <span>Open Source Models</span>
+                <span>Others</span>
             </div>
         </div>
 
@@ -275,159 +277,123 @@
         <div class="rankings" id="rankings-container"></div>
 
         <div class="footer">
-            <p>Task Success Rate measures completion of video generation objectives • Generation Quality measures visual fidelity and coherence</p>
+            <p>Task Success Rate measures completion of task goals • Generation Quality measures aesthetics and image quality</p>
         </div>
     </div>
-
     <script>
         const models = [
           {
+            name: "Runway Gen4",
+            category: "Runway • Video Generation",
+            type: "zero-shot video",
+            success: 64.79,
+            quality: 0.450638
+          },
+          {
             name: "Wan2.1†",
-            category: "Alibaba • Video Generation • Panoroma",
-            type: "research",
-            success: 62.6,
-            quality: 0.380
+            category: "Alibaba • Video Generation",
+            type: "post-trained video",
+            success: 62.61,
+            quality: 0.379627
           },
           {
             name: "SVD†",
-            category: "Stability AI • Video Generation • Panoroma",
-            type: "research",
-            success: 61.0,
-            quality: 0.363
+            category: "Stability AI • Video Generation",
+            type: "post-trained video",
+            success: 60.98,
+            quality: 0.362787
           },
           {
-            name: "Cosmos†",
-            category: "Nvidia • Video Generation • Panoroma",
-            type: "research",
-            success: 60.3,
-            quality: 0.360
-          },
-          {
-            name: "Runway",
-            category: "Runway • Video Generation", 
-            type: "commercial",
-            success: 64.8,
-            quality: 0.360 //placeholder
-          },
-          {
-            name: "Wan2.2 14B†",
-            category: "Alibaba • Video Generation • Front",
-            type: "research",
-            success: 62.4,
-            quality: 0.360 // placeholder
-          },
-          {
-            name: "Wan2.1†",
-            category: "Alibaba • Video Generation • Front",
-            type: "research",
-            success: 62.3,
-            quality: 0.380 //placeholder
+            name: "Cosmos-P2†",
+            category: "NVIDIA • Video Generation",
+            type: "post-trained video",
+            success: 60.25,
+            quality: 0.352225
           },
           {
             name: "Wan2.2 A14B",
             category: "Alibaba • Video Generation",
-            type: "commercial",
-            success: 59.5,
-            quality: 0.469
-          },
-          {
-            name: "Cosmos†",
-            category: "Nvidia • Video Generation • Front",
-            type: "research",
-            success: 59.0,
-            quality: 0.360 //placeholder
+            type: "zero-shot video",
+            success: 59.53,
+            quality: 0.459142
           },
           {
             name: "Wan2.1",
             category: "Alibaba • Video Generation",
-            type: "commercial",
-            success: 58.3,
-            quality: 0.478
-          },
-          {
-            name: "SVD†",
-            category: "Stability AI • Video Generation • Front",
-            type: "research",
-            success: 57.9,
-            quality: 0.363 //placeholder
+            type: "zero-shot video",
+            success: 58.26,
+            quality: 0.478106
           },
           {
             name: "SVD",
             category: "Stability AI • Video Generation",
-            type: "commercial",
-            success: 57.7,
-            quality: 0.371
+            type: "zero-shot video",
+            success: 57.71,
+            quality: 0.371056
           },
           {
             name: "Hunyuan",
             category: "Hunyuan • Video Generation",
-            type: "commercial",
-            success: 57.7,
-            quality: 0.396
+            type: "zero-shot video",
+            success: 57.71,
+            quality: 0.396051
           },
           {
             name: "SE3DS",
-            category: "Open Source • Image Generation",
-            type: "open-source",
-            success: 57.5,
-            quality: 0.365
+            category: "Open Source • Other",
+            type: "other",
+            success: 57.53,
+            quality: 0.364727
           },
           {
-            name: "LTX†",
-            category: "Lightricks • Image Generation • Panorama", //check
-            type: "research",
-            success: 57.5,
-            quality: 0.340
+            name: "LTXVideo†",
+            category: "Lightricks • Video Generation",
+            type: "post-trained video",
+            success: 57.53,
+            quality: 0.340077
           },
           {
             name: "NWM",
-            category: "Meta • Image Generation",
-            type: "open-source",
-            success: 57.4,
-            quality: 0.325
+            category: "Open Source • Other",
+            type: "other",
+            success: 57.35,
+            quality: 0.324765
+          },
+          {
+            name: "Pathdreamer",
+            category: "Open Source • Other",
+            type: "other",
+            success: 56.99,
+            quality: 0.339489
           },
           {
             name: "Wan2.2 5B†",
-            category: "Alibaba • Video Generation • Front",
-            type: "research",
-            success: 57.2,
-            quality: 0.325 //placeholder
+            category: "Alibaba • Video Generation",
+            type: "post-trained video",
+            success: 56.25,
+            quality: 0.380021
           },
           {
-            name: "PathDreamer",
-            category: "Open Source • Image Generation",
-            type: "open-source",
-            success: 57.0,
-            quality: 0.339
+            name: "LTXVideo",
+            category: "Lightricks • Video Generation",
+            type: "zero-shot video",
+            success: 56.08,
+            quality: 0.382416
           },
           {
-            name: "LTX",
-            category: "Lightricks • Image Generation",
-            type: "commercial",
-            success: 56.1,
-            quality: 0.382
-          },
-          {
-            name: "Wan2.2 5B†",
-            category: "Alibaba • Video Generation • Panorama",
-            type: "research",
-            success: 56.3,
-            quality: 0.380
+            name: "Cosmos-P2",
+            category: "NVIDIA • Video Generation",
+            type: "zero-shot video",
+            success: 55.35,
+            quality: 0.481732
           },
           {
             name: "Wan2.2 5B",
             category: "Alibaba • Video Generation",
-            type: "commercial",
-            success: 55.4,
-            quality: 0.393
-          },
-          {
-            name: "Cosmos",
-            category: "Nvidia • Video Generation",
-            type: "commercial",
-            success: 55.4,
-            quality: 0.482
-          },
+            type: "zero-shot video",
+            success: 55.35,
+            quality: 0.392775
+          }
         ];
 
         function renderModels() {
@@ -442,10 +408,13 @@
 
                 let type;
                 if (model.name.includes("†")) {
+                    // type = "post-trained video"; // 蓝色
                     type = "research"; // 蓝色
-                } else if (model.category.includes("Open Source")) {
+                } else if (model.type.includes("other")) {
+                    // type = "other"; // 绿色
                     type = "open-source"; // 绿色
                 } else {
+                    // type = "zero-shot video"; // 红色
                     type = "commercial"; // 红色
                 }
 

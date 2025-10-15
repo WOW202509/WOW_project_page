@@ -156,7 +156,7 @@ function displayFrame(i, skipVideoInit = false) {
         <div class="step-card ${f.currentStep === 2 ? 'active' : ''}">
           <div class="step-h">
             <span class="step-num">2</span>
-            <span class="step-title">High-level Plans & World Model</span>
+            <span class="step-title">High-level Plans & World Model Simulation</span>
             ${planCount > 2 ? `<button class="fold-btn" onclick="togglePlans(${i})" style="margin-left:auto;padding:2px 8px;font-size:.75em;border:1px solid #ccc;border-radius:4px;background:#fff;cursor:pointer">${showAll ? '▲ Fold' : '▼ Show All (' + planCount + ')'}</button>` : ''}
           </div>
           <div class="plan-pairs" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
