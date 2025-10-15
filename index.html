@@ -108,7 +108,6 @@
             <p class="caption caption-pipeline">
               In this work, we propose <img src="media/logo.svg" alt="World-In-World" class="inline-logo">, which wraps generative <u>World</u> models <u>In</u> a closed-loop <u>World</u> interface to measure their practical utility for embodied agents.
               <em>We test whether generated worlds actually enhance embodied reasoning and task performance</em>—for example, helping an agent perceive the environment, plan and execute actions, and replan based on new observations <em>within such a closed loop</em>. Establishing this evaluation framework is essential for tracking genuine progress across the rapidly expanding landscape of visual world models and embodied AI.
-            </p>
               <!-- Specifically, we present a unified strategy for closed-loop online planning and a standardized action API to seamlessly integrate diverse world models into closed-loop tasks.
               The online planning strategy allows the agent to look ahead by anticipating environmental changes and task rewards before committing to an action. The standardized action API harmonizes input modalities expected by different world models, so that each model can be controlled consistently within the same evaluation protocol. In addition, we introduce a post-training protocol that fine-tunes pretrained video generators using a modest amount of action-observation data drawn from the same action space as the downstream tasks, which allows us to examine their adaptation potential and to characterize a data scaling law. -->
               <!-- We introduce the first open benchmark to evaluate world models by closed-loop task success, analyze the link between task success and visual quality. -->
@@ -155,7 +154,6 @@
           <div class="media-frame">
             <!-- <div class="framed-media"> -->
             <img src="media/task_overview.png" alt="Task Overview" class="responsive-image">
-            </img>
             <!-- </div> -->
           </div>
         </div>
@@ -207,7 +205,7 @@
             Recent video generators (e.g., Wan2.1) produce appealing clips but offer limited low-level control from text prompts, so they help embodied tasks only modestly without adaptation.
             After action-conditioned post-training, action-motion alignment improves and success rates rise.
             <br>
-            <em>Left:</em> embodied task success rate vs. visual quality. † = post-trained with extra data.
+            <em>Left:</em> Embodied task success rate vs. visual quality. † = post-trained with extra data.
             <br>
             <em>Right:</em> higher controllability correlates with higher SR. Precise control, not just visual quality, enables effective decision-making.
           </p>
